@@ -34,6 +34,7 @@ class DestinationController extends BaseController
 
         $validator = Validator::make($input, [
             'name' => 'required',
+            'category' => 'required',
             'detail' => 'required',
             'price' => 'required',
             'location' => 'required'
@@ -78,6 +79,7 @@ class DestinationController extends BaseController
 
         $validator = Validator::make($input. [
             'name' => 'required',
+            'category' => 'required',
             'detail' => 'required',
             'price' => 'required',
             'location' => 'required'
@@ -87,6 +89,7 @@ class DestinationController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         } else {
             $destination->name = $input['name'];
+            $destination->category = $input['category'];
             $destination->detail = $input['detail'];
             $destination->price = $input['price'];
             $destination->location = $input['location'];

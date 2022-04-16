@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('destinations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('category');
             $table->text('detail');
             $table->integer('price');
             $table->string('location');

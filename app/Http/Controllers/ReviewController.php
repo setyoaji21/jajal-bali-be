@@ -32,6 +32,7 @@ class ReviewController extends BaseController
 
         $validator = Validator::make($input, [
             'idUser' => 'required',
+            'name' => 'required',
             'idDestination' => 'required',
             'rating' => 'required',
             'detail' => 'required'

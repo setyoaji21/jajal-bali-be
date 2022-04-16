@@ -77,7 +77,7 @@ class DestinationController extends BaseController
     {
         $input = $request->all();
 
-        $validator = Validator::make($input. [
+        $validator = Validator::make($input, [
             'name' => 'required',
             'category' => 'required',
             'detail' => 'required',
@@ -109,6 +109,6 @@ class DestinationController extends BaseController
     {
         $destination->delete();
 
-        return $this->sendResponse([], 'Product deleted successfully.');
+        return $this->sendResponse([], 'Destination deleted successfully.');
     }
 }

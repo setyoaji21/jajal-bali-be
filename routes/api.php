@@ -24,4 +24,5 @@ Route::post('login', [RegisterController::class, 'login']);
 Route::middleware('auth:api')->group( function () {
     Route::resource('destinations', DestinationController::class);
     Route::resource('reviews', ReviewController::class);
+    Route::post('/destinations/search', [DestinationController::class, 'search']);
 });

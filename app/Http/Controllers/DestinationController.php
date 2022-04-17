@@ -111,4 +111,21 @@ class DestinationController extends BaseController
 
         return $this->sendResponse([], 'Destination deleted successfully.');
     }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\Destination  $destination
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $data = $request->get('search');
+
+        $search = Destination::where('name', 'like', "%{$data}%")
+                    ->orWhere('location', 'like', "%{$data}%")
+                    ->get();
+        
+        return $this->sendResponse(DestinationResource::collection($search), 'Destinations retrieved successfully.');
+    }
 }

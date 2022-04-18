@@ -19,6 +19,7 @@ class Destination extends Model
         'category',
         'detail',
         'price',
-        'location'
+        'location',
+        'picture'
     ];
 }

@@ -20,6 +20,7 @@ use App\Http\Controllers\ReviewController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
+Route::get('/pictures/{filename}', [DestinationController::class, 'picture']);
 
 Route::middleware('auth:api')->group( function () {
     Route::resource('destinations', DestinationController::class);

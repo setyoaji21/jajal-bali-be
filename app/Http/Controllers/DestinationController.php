@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\BaseController as BaseController;
 use Validator;
 use App\Http\Resources\Destination as DestinationResource;
@@ -37,14 +39,26 @@ class DestinationController extends BaseController
             'category' => 'required',
             'detail' => 'required',
             'price' => 'required',
-            'location' => 'required'
+            'location' => 'required',
+            'picture' => 'required|mimes:png,jpeg|max:5120'
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $destination = Destination::create($input);
+        $file = $request->file('picture');
+        $name = '/pictures/' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->storePubliclyAs('public', $name);
+
+        $data['name'] = $input['name'];
+        $data['category'] = $input['category'];
+        $data['detail'] = $input['detail'];
+        $data['price'] = $input['price'];
+        $data['location'] = $input['location'];
+        $data['picture'] = $name;
+
+        $destination = Destination::create($data);
 
         return $this->sendResponse(new DestinationResource($destination), 'Destination added successfully.');
     }
@@ -127,5 +141,27 @@ class DestinationController extends BaseController
                     ->get();
         
         return $this->sendResponse(DestinationResource::collection($search), 'Destinations retrieved successfully.');
+    }
+
+    /**
+     * Show image from storage.
+     *
+     * @param  \App\Models\Destination  $destination
+     * @return \Illuminate\Http\Response
+     */
+    public function picture($fileName){
+        $path = Storage::disk('pictures/' . $filename);
+
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('detail');
             $table->integer('price');
             $table->string('location');
+            $table->string('picture');
             $table->timestamps();
         });
     }

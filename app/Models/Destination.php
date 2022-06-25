@@ -20,6 +20,9 @@ class Destination extends Model
         'detail',
         'price',
         'location',
+        'longitude',
+        'latitude',
+        'rating',
         'picture'
     ];
 }

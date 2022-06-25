@@ -40,7 +40,10 @@ class DestinationController extends BaseController
             'detail' => 'required',
             'price' => 'required',
             'location' => 'required',
-            'picture' => 'required|mimes:png,jpeg|max:5120'
+            'longitude' => 'required',
+            'latitude' => 'required',
+            'rating' => 'required',
+            'picture' => 'mimes:png,jpeg|max:5120'
         ]);
 
         if ($validator->fails()) {
@@ -56,6 +59,9 @@ class DestinationController extends BaseController
         $data['detail'] = $input['detail'];
         $data['price'] = $input['price'];
         $data['location'] = $input['location'];
+        $data['longitude'] = $input['longitude'];
+        $data['latitude'] = $input['latitude'];
+        $data['rating'] = $input['rating'];
         $data['picture'] = $name;
 
         $destination = Destination::create($data);

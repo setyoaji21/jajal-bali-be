@@ -21,6 +21,8 @@ class Destination extends JsonResource
             'detail' => $this->detail,
             'price' => $this->price,
             'location' => $this->location,
+            'longitude' => $this->longitude,
+            'latitude' => $this->latitude,
             'picture' => $this->picture,
             'picture_url' => env('APP_URL').$this->picture,
             'created_at' => $this->created_at->format('d/m/Y'),
